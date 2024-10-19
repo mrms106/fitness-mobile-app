@@ -24,7 +24,7 @@ const styles=StyleSheet.create({
     mainheader:{
       flexDirection:'row',
       justifyContent:'space-between',
-      marginTop:10
+      marginTop:20
     },
     maintitle:{
       marginLeft:20,
@@ -32,12 +32,16 @@ const styles=StyleSheet.create({
     title1:{
       fontSize:35,
       color:'black',
-      textDecorationStyle:'solid'
+      textDecorationStyle:'solid',
+      fontFamily:'Ubuntu-Bold'
+
     },
     title2:{
         fontSize:35,
         color:'red',
-        textDecorationStyle:'solid'
+        textDecorationStyle:'solid',
+        fontFamily:'Ubuntu-Bold',
+        marginTop:5
     },
     section2:{
       marginRight:15,
