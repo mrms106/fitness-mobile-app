@@ -35,9 +35,8 @@ export default function Imagecmp(): React.JSX.Element {
                 vertical={false}
                 autoplay={true}                         
                 autoplayInterval={5000}   
-                lockScrollWhileSnapping={true} 
                 autoplayDelay={1000} 
-                enableMomentum={false}              
+                         
             />
         </View>
     );

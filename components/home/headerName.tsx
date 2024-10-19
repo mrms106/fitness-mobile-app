@@ -73,7 +73,7 @@ const styles=StyleSheet.create({
         borderRadius:25
     },
     exrsize:{
-    fontSize:25,
+    fontSize:28,
     color:'black',
      margin:15,
     fontFamily:'Ubuntu-Bold',
