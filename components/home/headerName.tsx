@@ -1,5 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Icons from 'react-native-vector-icons/FontAwesome'
+import Icons2 from 'react-native-vector-icons/Ionicons'
+
+
 
 export default function HeaderName():React.JSX.Element{
     return(
@@ -13,8 +17,12 @@ export default function HeaderName():React.JSX.Element{
             </Text>
            </View>
            <View style={styles.section2}>
-            <View style={styles.profile}></View>
-            <View style={styles.noti}></View>
+            <View style={styles.profile}>
+            <Icons2 name="person-outline" size={25} color={'black'}/>
+            </View>
+            <View style={styles.noti}>
+            <Icons2 name="notifications" size={25} color={'gray'}/>
+            </View>
            </View>
         </View>
     )
@@ -47,16 +55,16 @@ const styles=StyleSheet.create({
       marginRight:15,
     },
     profile:{
-         width:40,
-         height:40,
-         backgroundColor:'black',
+         padding:10,
          borderRadius:25,
-         marginBottom:7
+         marginBottom:7,
+         borderColor:'gray',
+         borderWidth:1
     },
     noti:{
-        width:40,
-        height:40,
-        backgroundColor:'black',
+        borderColor:'gray',
+         borderWidth:1,
+        padding:10,
         borderRadius:25
     }
 })
