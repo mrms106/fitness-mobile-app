@@ -2,11 +2,12 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icons from 'react-native-vector-icons/FontAwesome'
 import Icons2 from 'react-native-vector-icons/Ionicons'
-
+import Imagecmp from "./images";
 
 
 export default function HeaderName():React.JSX.Element{
     return(
+    <>
         <View style={styles.mainheader}>
            <View style={styles.maintitle}>
            <Text style={styles.title1}>
@@ -24,7 +25,11 @@ export default function HeaderName():React.JSX.Element{
             <Icons2 name="notifications" size={25} color={'gray'}/>
             </View>
            </View>
+           
         </View>
+        <Imagecmp/>
+        <Text style={styles.exrsize}>Exersizes</Text>
+      </>  
     )
 }
 
@@ -66,5 +71,11 @@ const styles=StyleSheet.create({
          borderWidth:1,
         padding:10,
         borderRadius:25
+    },
+    exrsize:{
+    fontSize:25,
+    color:'black',
+     margin:15,
+    fontFamily:'Ubuntu-Bold',
     }
 })
