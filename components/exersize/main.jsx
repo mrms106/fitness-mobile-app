@@ -3,12 +3,14 @@ import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react
 import { apiKey,host } from "../../api";
 import ExersixeImg from "./image";
 import FastImage from 'react-native-fast-image';
+import { useNavigation } from "@react-navigation/native";
 
 export default function ExersizeMain({route}){
+    const navigation=useNavigation()
     const[data,setdata]=useState([])
     const { exersizetype } = route.params;
     const type=exersizetype.label
-    console.log(exersizetype)
+    
     const fetchData=async()=>{
 
         const url=`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${type}?limit=20&offset=0`
@@ -25,7 +27,7 @@ export default function ExersizeMain({route}){
         if(responce.ok){
             const result=await responce.json()
             setdata(result)
-            console.warn(data)
+           
         }
     }
     useEffect(()=>{
@@ -35,12 +37,13 @@ export default function ExersizeMain({route}){
         <>
            <View style={{flex:1}}>
               <ExersixeImg exersizetype={exersizetype}/>
+
               <View style={{flex:1,marginBottom:20}}>
               <FlatList
               numColumns={2}
               data={data}
               renderItem={({item})=>
-                <View >
+                <TouchableOpacity onPress={()=>navigation.navigate('ShowExersize',{item:item})} >
                  <FastImage
                     style={styles.gif}
                     source={{ uri: item.gifUrl }}
@@ -50,7 +53,7 @@ export default function ExersizeMain({route}){
                    <Text style={styles.gifname}>
                      {item.name.length > 14 ? item.name.slice(0, 14) + "..." : item.name}
                     </Text>
-                </View>
+                </TouchableOpacity>
                 
             }
               />

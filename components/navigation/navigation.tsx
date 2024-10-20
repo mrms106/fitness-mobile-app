@@ -4,16 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../home/home';
 import ExersizeMain from '../exersize/main';
-// A simple Login component (Homecmpnt)
-function Homecmpnt() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login Screen</Text>
-    </View>
-  );
-}
+import ShowMain from '../showexersize/showmain';
 
-// Create a Stack Navigator
+
 const Stack = createNativeStackNavigator();
 
 // Main navigation component
@@ -25,7 +18,10 @@ export default function Nav(): React.JSX.Element {
         options={{headerShown:false}}/>
         <Stack.Screen name="Exersize" component={ExersizeMain}
         options={{headerShown:false}} />
+      <Stack.Screen name="ShowExersize" component={ShowMain}
+        options={{headerShown:false}} />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }
