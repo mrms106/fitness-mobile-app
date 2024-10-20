@@ -11,7 +11,7 @@ export default function ExersizeMain({route}){
     console.log(exersizetype)
     const fetchData=async()=>{
 
-        const url=`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${type}?limit=10&offset=0`
+        const url=`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${type}?limit=20&offset=0`
 
         const options = {
             method: 'GET',
@@ -33,13 +33,14 @@ export default function ExersizeMain({route}){
     },[])
     return(
         <>
-           <View>
+           <View style={{flex:1}}>
               <ExersixeImg exersizetype={exersizetype}/>
+              <View style={{flex:1,marginBottom:20}}>
               <FlatList
               numColumns={2}
               data={data}
               renderItem={({item})=>
-                <View>
+                <View >
                  <FastImage
                     style={styles.gif}
                     source={{ uri: item.gifUrl }}
@@ -50,8 +51,10 @@ export default function ExersizeMain({route}){
                      {item.name.length > 14 ? item.name.slice(0, 14) + "..." : item.name}
                     </Text>
                 </View>
+                
             }
               />
+              </View>
            </View>
 
         </>
