@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap', // Allows wrapping of the images
         justifyContent: 'center',
-        minHeight:1900
+        marginBottom:400
     },
     imageWrapper: {
         width: '45%', // Adjusted to fit two images in a row (with some margin)
