@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { apiKey,host } from "../../api";
 
-export default function ExersizeMain(){
+export default function ExersizeMain({route}){
     const[data,setdata]=useState([])
-
+    const { exersizetype } = route.params;
+    console.log(exersizetype)
     const fetchData=async()=>{
 
         const url="https://exercisedb.p.rapidapi.com/exercises/bodyPart/back?limit=10&offset=0"
@@ -35,7 +36,9 @@ export default function ExersizeMain(){
                 <Text>{item.id}</Text>
             ))
            }
+         
           </View>
+
         </>
     )
 }

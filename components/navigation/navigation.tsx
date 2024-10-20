@@ -21,9 +21,9 @@ export default function Nav(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home"  component={ExersizeMain} 
+        <Stack.Screen name="Home"  component={Home} 
         options={{headerShown:false}}/>
-        <Stack.Screen name="Login" component={Homecmpnt} />
+        <Stack.Screen name="Exersize" component={ExersizeMain} />
       </Stack.Navigator>
     </NavigationContainer>
   );
