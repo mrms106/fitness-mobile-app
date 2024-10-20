@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { apiKey,host } from "../../api";
 import ExersixeImg from "./image";
+import FastImage from 'react-native-fast-image';
 
 export default function ExersizeMain({route}){
     const[data,setdata]=useState([])
@@ -39,10 +40,12 @@ export default function ExersizeMain({route}){
               data={data}
               renderItem={({item})=>
                 <View>
-                   <Image
-                     source={{ uri: item.gifUrl }}  
+                 <FastImage
                     style={styles.gif}
-                    />
+                    source={{ uri: item.gifUrl }}
+                    resizeMode={FastImage.resizeMode.cover} 
+                />
+
                    <Text style={styles.gifname}>
                      {item.name.length > 14 ? item.name.slice(0, 14) + "..." : item.name}
                     </Text>
