@@ -22,16 +22,16 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'Exersize'>;
 export default function BottomImage(): React.JSX.Element {
     const navigation = useNavigation<NavigationProp>();
     const data = [
-        { image: back, label: "Back" },
-        { image: cardio, label: "Cardio" },
-        { image: chest, label: "Chest" },
-        { image: lowerarm, label: "LowerArm" },
-        { image: lowerleg, label: "LowerLeg" },
-        { image: neck, label: "Neck" },
-        { image: shoulder, label: "Shoulder" },
-        { image: upperArm, label: "UpperArm" },
-        { image: upperLeg, label: "UpperLeg" },
-        { image: waist, label: "Waist" }
+        { image: back, label: "back" },
+        { image: cardio, label: "cardio" },
+        { image: chest, label: "chest" },
+        { image: lowerarm, label: "lower arms" },
+        { image: lowerleg, label: "lower legs" },
+        { image: neck, label: "neck" },
+        { image: shoulder, label: "shoulders" },
+        { image: upperArm, label: "upper arms" },
+        { image: upperLeg, label: "upper legs" },
+        { image: waist, label: "waist" }
       ];
       
 
