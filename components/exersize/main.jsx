@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { Image, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { apiKey,host } from "../../api";
+import ExersixeImg from "./image";
 
 export default function ExersizeMain({route}){
     const[data,setdata]=useState([])
@@ -25,20 +26,16 @@ export default function ExersizeMain({route}){
             console.warn(data)
         }
     }
-    useEffect(()=>{
-        fetchData()
-    },[])
+    // useEffect(()=>{
+    //     fetchData()
+    // },[])
     return(
         <>
-          <View>
-           {
-            data.map((item)=>(
-                <Text>{item.id}</Text>
-            ))
-           }
-         
-          </View>
+           <View>
+              <ExersixeImg exersizetype={exersizetype}/>
+           </View>
 
         </>
     )
 }
+

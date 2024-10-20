@@ -23,7 +23,8 @@ export default function Nav(): React.JSX.Element {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home"  component={Home} 
         options={{headerShown:false}}/>
-        <Stack.Screen name="Exersize" component={ExersizeMain} />
+        <Stack.Screen name="Exersize" component={ExersizeMain}
+        options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
