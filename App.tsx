@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import Home from './components/home/home';
 import Nav from './components/navigation/navigation';
 import notifee from '@notifee/react-native';
-
+import { NotificationProvider } from './components/notification/NotificationContext';
 function App(): React.JSX.Element {
 
   async function onDisplayNotification() {
@@ -35,7 +35,9 @@ function App(): React.JSX.Element {
   },[])
 
   return(
-     <Nav/>
+    <NotificationProvider>
+       <Nav/>
+    </NotificationProvider>
   )
 }
 export default App;

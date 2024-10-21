@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, TextInput, View, Alert } from "react-native";
+import { useNotification } from './NotificationContext'; // Adjust the path as needed
 
 export default function SetNotification() {
-  const [hour, setHour] = useState(7);
+  const { setNotificationTime } = useNotification();
+  const [hour, setHour] = useState(0);
   const [minute, setMinute] = useState(0);
 
-  // Function to handle submission
-  const onSubmit = () => {
-    console.log("Hour:", hour, "Minute:", minute);
-    Alert.alert("Submitted", `Hour: ${hour}, Minute: ${minute}`);
+  const onSubmit = async () => {
+    try {
+      await setNotificationTime(hour, minute);
+      Alert.alert("Saved", `Notification set for Hour: ${hour}, Minute: ${minute}`);
+    } catch (e) {
+      console.error("Failed to save notification time.", e);
+    }
   };
 
-  // Function to handle hour input with limit
+  // Input validation functions
   const handleHourChange = (val) => {
     const newHour = Number(val);
     if (newHour >= 0 && newHour <= 24) {
@@ -21,7 +26,6 @@ export default function SetNotification() {
     }
   };
 
-  // Function to handle minute input with limit
   const handleMinuteChange = (val) => {
     const newMinute = Number(val);
     if (newMinute >= 0 && newMinute < 60) {
