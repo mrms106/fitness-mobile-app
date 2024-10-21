@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Icons from 'react-native-vector-icons/FontAwesome'
-import Icons2 from 'react-native-vector-icons/Ionicons'
+import IconsNoti from "../notification/icon";
 import Imagecmp from "./images";
 
 
@@ -17,14 +16,7 @@ export default function HeaderName():React.JSX.Element{
                  WORKOUT
             </Text>
            </View>
-           <View style={styles.section2}>
-            <View style={styles.profile}>
-            <Icons2 name="person-outline" size={25} color={'black'}/>
-            </View>
-            <View style={styles.noti}>
-            <Icons2 name="notifications" size={25} color={'gray'}/>
-            </View>
-           </View>
+           <IconsNoti/>
            
         </View>
         <Imagecmp/>
@@ -56,22 +48,7 @@ const styles=StyleSheet.create({
         fontFamily:'Ubuntu-Bold',
         marginTop:5
     },
-    section2:{
-      marginRight:15,
-    },
-    profile:{
-         padding:10,
-         borderRadius:25,
-         marginBottom:7,
-         borderColor:'gray',
-         borderWidth:1
-    },
-    noti:{
-        borderColor:'gray',
-         borderWidth:1,
-        padding:10,
-        borderRadius:25
-    },
+   
     exrsize:{
     fontSize:28,
     color:'black',

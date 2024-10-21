@@ -19,10 +19,11 @@ function App(): React.JSX.Element {
     });
 
     await notifee.displayNotification({
-      title: 'hey,Welcome to fitness club',
-      body: 'here you can check all fitness options..',
+      title: 'hey,lets start workout',
       android: {
         channelId,
+        sound:'default',
+        vibrationPattern: [300, 500],
         pressAction: {
           id: 'default',
         },
