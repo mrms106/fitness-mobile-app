@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../home/home';
 import ExersizeMain from '../exersize/main';
 import ShowMain from '../showexersize/showmain';
+import SetNotification from '../notification/setnotification';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +21,8 @@ export default function Nav(): React.JSX.Element {
         options={{headerShown:false}} />
       <Stack.Screen name="ShowExersize" component={ShowMain}
         options={{headerShown:false}} />
+         <Stack.Screen name="Setnotification" component={SetNotification}
+        options={{headerShown:true}} />
       </Stack.Navigator>
       
     </NavigationContainer>

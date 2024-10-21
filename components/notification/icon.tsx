@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
-import { Alert } from 'react-native';
+import { Alert, TouchableOpacity } from 'react-native';
 import { StyleSheet, View, Text } from "react-native";
 import Icons2 from 'react-native-vector-icons/Ionicons';
 import notifee, { TimestampTrigger, TriggerType, AndroidImportance } from '@notifee/react-native';
+import NotificationIcon from "./notificationicon";
+
 
 
 export default function IconsNoti(): React.JSX.Element {
+
+  
 
     async function createNotificationChannel() {
         await notifee.createChannel({
@@ -102,12 +106,10 @@ export default function IconsNoti(): React.JSX.Element {
       }, []);
     return (
         <View style={styles.section2}>
-            <View style={styles.profile}>
+            <View style={styles.profile} >
                 <Icons2 name="person-outline" size={25} color={'black'} />
             </View>
-            <View style={styles.noti}>
-                <Icons2 name="notifications" size={25} color={'gray'} />
-            </View>
+            <NotificationIcon/>
         </View>
     );
 }
@@ -123,10 +125,5 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1
     },
-    noti: {
-        borderColor: 'gray',
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 25
-    },
+   
 });
