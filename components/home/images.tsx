@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 import { View, Image, StyleSheet, Dimensions, ImageSourcePropType } from "react-native";
 import Carousel from "react-native-snap-carousel";
 
-import slide1 from '../../assets/images/slide1.png';
-import slide2 from '../../assets/images/slide2.png';
-import slide3 from '../../assets/images/slide3.png';
-import slide4 from '../../assets/images/slide4.png';
-import slide5 from '../../assets/images/slide5.png';
+import slide1 from '../../assets/images/neck.png';
+import slide2 from '../../assets/images/neck.png';
+import slide3 from '../../assets/images/neck.png';
+import slide4 from '../../assets/images/neck.png';
+import slide5 from '../../assets/images/neck.png';
 
 const { width: screenWidth } = Dimensions.get('window');
 

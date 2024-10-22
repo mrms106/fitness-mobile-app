@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Alert, View, StyleSheet } from 'react-native';
+import React, { useEffect } from "react";
+import { View, StyleSheet } from 'react-native';
 import Icons2 from 'react-native-vector-icons/Ionicons';
-import notifee, { TimestampTrigger, TriggerType, AndroidImportance } from '@notifee/react-native';
 import NotificationIcon from "./notificationicon";
-import { useNotification } from "./NotificationContext";
-
+import { useNotification } from "./NotificationContext"; // Adjust the path as needed
+import notifee, { RepeatFrequency, TriggerType, TimestampTrigger,AndroidImportance } from '@notifee/react-native';
 export default function IconsNoti(): React.JSX.Element {
-    const { hour, minute } = useNotification();
+  const { hour, minute, hour2, minute2 } = useNotification();
+
   // Create notification channel
   async function createNotificationChannel() {
     await notifee.createChannel({
@@ -33,66 +33,57 @@ export default function IconsNoti(): React.JSX.Element {
     return target;
   }
 
-   // Schedule daily notification
-  async function scheduleDailyNotification(hour: number, minute: number, title: string, body: string) {
-    // Get the next scheduled time
-    const date = getNextScheduledTime(hour, minute);
 
-    // Create a TimestampTrigger to schedule the notification daily
-    const trigger: TimestampTrigger = {
-      type: TriggerType.TIMESTAMP,
-      timestamp: date.getTime(),
-    };
 
-    await notifee.createTriggerNotification(
-      {
-        title,
-        body,
-        android: {
-          channelId: 'default',
-          sound: 'default',
-          vibrationPattern: [300, 500],
-          pressAction: { id: 'default' },
-        },
+// Schedule daily notification
+async function scheduleDailyNotification(id: string, hour: number, minute: number, title: string, body: string) {
+  const date = getNextScheduledTime(hour, minute);
+
+  console.log(`Scheduling notification (${id}) for:`, date); // Log for debugging
+
+  const trigger: TimestampTrigger = {
+    type: TriggerType.TIMESTAMP,
+    timestamp: date.getTime(),
+    repeatFrequency: RepeatFrequency.DAILY // Set this to repeat daily
+  };
+
+  await notifee.createTriggerNotification(
+    {
+      id,  // Use a unique id for each notification
+      title,
+      body,
+      android: {
+        channelId: 'default',
+        sound: 'default',
+        vibrationPattern: [300, 500],
+        pressAction: { id: 'default' },
       },
-      trigger
-    );
+    },
+    trigger
+  );
+}
 
-    // After scheduling the first notification, also set up daily notifications
-    // For Android, we can use a daily trigger to repeat the notification every day
-    await notifee.createTriggerNotification(
-      {
-        title,
-        body,
-        android: {
-          channelId: 'default',
-          sound: 'default',
-          vibrationPattern: [300, 500],
-          pressAction: { id: 'default' },
-        },
-      },
-      {
-        type: TriggerType.REPEATING,
-        interval: 24 * 60 * 60 * 1000, // Daily interval in milliseconds
-        timestamp: date.getTime(), // Start from the calculated timestamp
-      }
-    );
-  }
+  
 
-  // Schedule notifications whenever hour or minute changes
-  useEffect(() => {
-    const schedule = async () => {
-      if (hour !== null && minute !== null) {
-        await createNotificationChannel();
+useEffect(() => {
+  const schedule = async () => {
+    if (hour !== null && minute !== null && hour2 !== null && minute2 !== null) {
+      await createNotificationChannel();
 
-        // Schedule the notification for the stored time (don't reset the time)
-        scheduleDailyNotification(hour, minute, 'Good Evening', 'Time for your evening workout!');
-        
-      }
-    };
+      // Schedule the first notification to repeat daily
+      await scheduleDailyNotification('first_notification', hour, minute, 'Good Evening', 'Time for your evening workout!');
 
-    schedule();
-  }, [hour, minute]);
+      // Schedule the second notification to repeat daily
+      await scheduleDailyNotification('second_notification', hour2, minute2, 'Second Reminder', 'Time for your second activity!');
+    }
+  };
+
+  schedule();
+}, [hour, minute, hour2, minute2]);
+
+  
+  
+
   return (
     <View style={styles.section2}>
       <View style={styles.profile}>
