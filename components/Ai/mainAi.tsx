@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { View, Button, Text, TextInput } from "react-native";
+import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { geminiApi } from "../../api"; // Assuming this imports your API key
+import Icons2 from 'react-native-vector-icons/Feather';
+import Icon from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 
+interface Part {
+    text: string;
+  }
+  
+  interface Content {
+    parts: Part[];
+  }
+  
+  interface Item {
+    content: Content[];
+  }
 export default function MainAi(): React.JSX.Element {
-  const [prompt, setPrompt] = useState('');
-  const [response, setResponse] = useState([]);
 
+    const [prompt, setPrompt] = useState<string>('');  
+    const [response, setResponse] = useState<Item[]>([]);  
+    const [showprompt, setshowprompt] = useState<string>('');
+  
+  const navigation=useNavigation()
   const fetchResponse = async () => {
+    setshowprompt(prompt)
     try {
         const response = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApi}`,
@@ -26,38 +44,123 @@ export default function MainAi(): React.JSX.Element {
             }),
           }
         );
-    
+       
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
-    
+        
+         
         const data = await response.json();
         console.log(data);  // Handle the response data
         setResponse(data.candidates)
-      } catch (error) {
+      } catch (error:any) {
         console.error('Error making the request:', error.message);
       }
     }
-
+const onsubmit=()=>{
+    fetchResponse()
+    setPrompt('')
+}
   useEffect(() => {
     // Don't call fetchResponse within useEffect unless required for initial data
   }, []);
 
   return (
-    <View>
+    
+    <>
+    <View style={{flex:1}} >
+    <TouchableOpacity style={styles.btn} onPress={()=>navigation.goBack()}><Icon size={24} color={"white"} name="caretleft"/></TouchableOpacity>
+       <ScrollView>
+       <View style={styles.showpromtmain}>
+       <Text style={styles.showpromt}>{showprompt || "ask for tips to the Ai"}  </Text>
+       </View>
+       <View>
+         {
+        response.map((item)=>(
+            item.content.parts.map((text)=>(
+               
+                <Text style={styles.respocetext}>{text.text}</Text>
+                
+            ))
+        ))
+      }
+      </View>
+      </ScrollView>
+      
+    <View style={styles.maininput}>
       <TextInput
         placeholder="Enter your prompt"
         value={prompt}
         onChangeText={setPrompt}
+        style={styles.input}
       />
-      <Button title="Send" onPress={fetchResponse} />
-      {
-        response.map((item)=>(
-            item.content.parts.map((text)=>(
-                <Text>{text.text}</Text>
-            ))
-        ))
-      }
+      <TouchableOpacity style={styles.btn} onPress={onsubmit}><Icons2 size={28} color={'white'} name="send"/></TouchableOpacity>
     </View>
+    
+
+    </View>
+    </>
+    
   );
 }
+
+const styles=StyleSheet.create({
+   
+    maininput:{
+       justifyContent:'flex-end',
+       alignItems:'flex-end',
+       flexDirection:'row',
+       flex:1,
+       marginBottom:20
+        
+    },
+    input:{
+        borderWidth:1,
+        width:'80%',
+        height:60,
+        borderRadius:20,
+        color:'black',
+        fontSize:17,
+        fontFamily:'Ubuntu-Medium',
+        padding:15,
+        borderColor:'gray',
+        backgroundColor:"#f5f5f5"
+    },
+    btn:{
+       
+        margin:5,
+        width:60,
+        height:50,
+        borderRadius:15,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'red'
+    },
+    showpromtmain:{
+    justifyContent:'flex-end',
+    alignItems:'flex-end',
+    marginTop:30
+    
+    },
+    showpromt:{
+       padding:10,
+       margin:10,
+       borderRadius:10,
+       fontSize:17,
+       color:'white',
+       backgroundColor:'red',
+       fontFamily:'Ubuntu-Medium'
+    },
+    respocetext:{
+        padding:10,
+        margin:15,
+        borderRadius:10,
+        fontSize:18,
+        color:'black',
+        fontFamily:'Ubuntu-Medium',
+        marginBottom:50,
+    
+  
+    },
+    
+})

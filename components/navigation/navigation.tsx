@@ -25,7 +25,7 @@ export default function Nav(): React.JSX.Element {
          <Stack.Screen name="Setnotification" component={SetNotification}
         options={{headerShown:false}} />
         <Stack.Screen name="Geminiai" component={MainAi}
-        options={{headerShown:true}} />
+        options={{headerShown:false}} />
       </Stack.Navigator>
       
     </NavigationContainer>
