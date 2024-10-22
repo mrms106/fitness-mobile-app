@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,Alert } from 'react-native';
 import Icons2 from 'react-native-vector-icons/Ionicons';
 import NotificationIcon from "./notificationicon";
 import { useNotification } from "./NotificationContext"; // Adjust the path as needed
@@ -15,7 +15,7 @@ export default function IconsNoti(): React.JSX.Element {
       importance: AndroidImportance.HIGH,
       sound: 'default',
       vibration: true,
-      vibrationPattern: [300, 500],
+      vibrationPattern: [0, 500],
     });
   }
 
@@ -81,7 +81,36 @@ useEffect(() => {
   schedule();
 }, [hour, minute, hour2, minute2]);
 
+   // battery optimization cheack
+   async function checkBatteryOptimization() {
+    const isBatteryOptimizationEnabled = await notifee.isBatteryOptimizationEnabled();
   
+    if (isBatteryOptimizationEnabled) {
+      // Show an alert to ask for user's confirmation
+      Alert.alert(
+        'Disable Battery Optimization',
+        'To ensure notifications are received on time, please disable battery optimization for this app.',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'Allow',
+            onPress: async () => {
+              // Open battery optimization settings for the user to disable it
+              await notifee.openBatteryOptimizationSettings();
+            },
+          },
+        ],
+        { cancelable: true }
+      );
+    }
+  }
+  
+  useEffect(() => {
+    checkBatteryOptimization();
+  }, []);
   
 
   return (
