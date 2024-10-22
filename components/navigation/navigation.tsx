@@ -22,7 +22,7 @@ export default function Nav(): React.JSX.Element {
       <Stack.Screen name="ShowExersize" component={ShowMain}
         options={{headerShown:false}} />
          <Stack.Screen name="Setnotification" component={SetNotification}
-        options={{headerShown:true}} />
+        options={{headerShown:false}} />
       </Stack.Navigator>
       
     </NavigationContainer>
