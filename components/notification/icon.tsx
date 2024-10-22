@@ -85,24 +85,13 @@ useEffect(() => {
   
 
   return (
-    <View style={styles.section2}>
-      <View style={styles.profile}>
-        <Icons2 name="person-outline" size={25} color={'black'} />
-      </View>
+    
+      
       <NotificationIcon />
-    </View>
+   
   );
 }
 
 const styles = StyleSheet.create({
-  section2: {
-    marginRight: 15,
-  },
-  profile: {
-    padding: 10,
-    borderRadius: 25,
-    marginBottom: 7,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
+ 
 });

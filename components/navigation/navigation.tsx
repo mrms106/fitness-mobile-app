@@ -6,6 +6,7 @@ import Home from '../home/home';
 import ExersizeMain from '../exersize/main';
 import ShowMain from '../showexersize/showmain';
 import SetNotification from '../notification/setnotification';
+import MainAi from '../Ai/mainAi';
 
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,8 @@ export default function Nav(): React.JSX.Element {
         options={{headerShown:false}} />
          <Stack.Screen name="Setnotification" component={SetNotification}
         options={{headerShown:false}} />
+        <Stack.Screen name="Geminiai" component={MainAi}
+        options={{headerShown:true}} />
       </Stack.Navigator>
       
     </NavigationContainer>
