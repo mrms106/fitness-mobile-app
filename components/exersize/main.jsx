@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { apiKey,host } from "../../api";
 import ExersixeImg from "./image";
 import FastImage from 'react-native-fast-image';
@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function ExersizeMain({route}){
     const navigation=useNavigation()
     const[data,setdata]=useState([])
+    const[loader,setloader]=useState(true)
     const { exersizetype } = route.params;
     const type=exersizetype.label
     
@@ -25,6 +26,7 @@ export default function ExersizeMain({route}){
         };
         const responce=await fetch(url,options)
         if(responce.ok){
+            setloader(false)
             const result=await responce.json()
             setdata(result)
            
@@ -39,6 +41,8 @@ export default function ExersizeMain({route}){
               <ExersixeImg exersizetype={exersizetype}/>
 
               <View style={{flex:1,marginBottom:20}}>
+               {  loader ?
+             <ActivityIndicator style={{marginTop:'20%'}}  size={80} color={'black'}  />:
               <FlatList
               numColumns={2}
               data={data}
@@ -56,7 +60,7 @@ export default function ExersizeMain({route}){
                 </TouchableOpacity>
                 
             }
-              />
+              />}
               </View>
            </View>
 
