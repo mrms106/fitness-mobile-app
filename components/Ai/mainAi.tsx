@@ -99,6 +99,7 @@ const onsubmit=()=>{
     <View style={styles.maininput}>
       <TextInput
         placeholder="Enter your prompt"
+        placeholderTextColor={'gray'}
         value={prompt}
         onChangeText={setPrompt}
         style={styles.input}
