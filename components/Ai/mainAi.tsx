@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { geminiApi } from "../../api"; // Assuming this imports your API key
 import Icons2 from 'react-native-vector-icons/Feather';
 import Icon from "react-native-vector-icons/AntDesign";
@@ -21,9 +21,11 @@ export default function MainAi(): React.JSX.Element {
     const [prompt, setPrompt] = useState<string>('');  
     const [response, setResponse] = useState<Item[]>([]);  
     const [showprompt, setshowprompt] = useState<string>('');
+    const [isloading,setisloading]=useState<boolean>(false)
   
   const navigation=useNavigation()
   const fetchResponse = async () => {
+    setisloading(true)
     setshowprompt(prompt)
     try {
         const response = await fetch(
@@ -46,15 +48,20 @@ export default function MainAi(): React.JSX.Element {
         );
        
         if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
+          // throw new Error(`Error: ${response.status}`);
+          setisloading(false)
+          setshowprompt("something went wrong please try after some time")
         }
         
          
         const data = await response.json();
         console.log(data);  // Handle the response data
+        setisloading(false)
         setResponse(data.candidates)
       } catch (error:any) {
         console.error('Error making the request:', error.message);
+        setisloading(false)
+        setshowprompt(error.message)
       }
     }
 const onsubmit=()=>{
@@ -76,6 +83,8 @@ const onsubmit=()=>{
        </View>
        <View>
          {
+         isloading ? <Text style={styles.respocetext}>Generating-Response <ActivityIndicator size={25} color={'black'}/> </Text> 
+         :
         response.map((item)=>(
             item.content.parts.map((text)=>(
                
