@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
+import { View, Button, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from "react-native";
 import { geminiApi } from "../../api"; // Assuming this imports your API key
 import Icons2 from 'react-native-vector-icons/Feather';
 import Icon from "react-native-vector-icons/AntDesign";
@@ -65,6 +65,9 @@ export default function MainAi(): React.JSX.Element {
       }
     }
 const onsubmit=()=>{
+   if(!prompt.trim()){
+    return Alert.alert("Enter a valid prompt","prompt can`t be a empty")
+   }
     fetchResponse()
     setPrompt('')
 }

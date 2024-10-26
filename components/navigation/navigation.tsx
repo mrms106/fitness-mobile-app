@@ -6,7 +6,7 @@ import Home from '../home/home';
 import ExersizeMain from '../exersize/main';
 import ShowMain from '../showexersize/showmain';
 import SetNotification from '../notification/setnotification';
-import MainAi from '../Ai/mainAi';
+import MainAi from '../firstIcon/mainAi';
 
 
 const Stack = createNativeStackNavigator();
